@@ -3,6 +3,7 @@ package com.example.simplecamera;
 import java.util.Arrays;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
@@ -22,6 +23,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Surface;
 import android.view.TextureView;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class MainActivity extends Activity {
 	
@@ -156,6 +159,10 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		//same as set-up android:screenOrientation="portrait" in <activity>, AndroidManifest.xml
+		//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.activity_main);
 		
 		mTextureView = (TextureView) findViewById(R.id.textureView1);
