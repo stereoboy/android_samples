@@ -23,6 +23,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	private static final String TAG = "FaceDetector";
 
 	private Camera mCamera = null;
+	private final static int	mCameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
 	private CameraPreview mPreview = null;
 
 
@@ -81,7 +82,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		mCamera.setParameters(params);
 
 		// CameraPreview Initialization
-		mPreview = new CameraPreview(this, mCamera);
+		mPreview = new CameraPreview(this, mCamera, mCameraId);
 		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
 		preview.addView(mPreview);
 		preview.setOnTouchListener(this);  // for Hiding Softkey
@@ -123,7 +124,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	public static Camera getCameraInstance(){
 		Camera camera = null;
 		try {
-			camera = Camera.open(Camera.CameraInfo.CAMERA_FACING_FRONT);
+			camera = Camera.open(mCameraId);
 		} catch (Exception error)
 		{
 			error.printStackTrace();
